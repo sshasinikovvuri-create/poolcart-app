@@ -1,3611 +1,1352 @@
+Yes. And I’d change the pricing logic before the chairman sees it.
+
+The current prototype basically says “base price × discount = new price.” A judge can immediately ask: “Why would the distributor voluntarily give away 18%? Where does that saving come from, and how is anyone still profitable?”
+
+A more defensible PoolCart model is: the discount is earned by aggregation, not magically created. Bahrain’s food distribution business is volume-sensitive, and local distributors already serve wholesale, restaurants, cafeterias and retailers. One Bahrain FMCG source also notes that profitability depends heavily on the cost of serving many small outlets. Historical Bahrain market guidance put food importer mark-ups around 10–15% and retail food prices around 15–20% above import/wholesale prices; I’d treat those as context rather than a current guaranteed margin.
+
+So I would not tell the chairman that every PoolCart order gets 18% cheaper. Instead, make the app show a realistic tier structure such as 5%, 8%, 12%, up to 15% depending on pooled volume. Keep 18% only as a possible supplier-specific maximum if you actually have a quote supporting it. Bahrain government promotional price examples also show common grocery discounts around 9–14% on items such as rice, oil, sugar and pasta, which makes a 5–15% prototype range much easier to defend.
+
+For example, suppose a retailer normally pays BHD 100 for a basket. At a successful PoolCart tier, the distributor might quote BHD 88 because PoolCart is bringing one aggregated order instead of many fragmented small ones. PoolCart's 3% commission = BHD 2.64, leaving an illustrative retailer checkout of BHD 90.64 before any separately charged delivery. The retailer therefore saves BHD 9.36, or 9.36%, while PoolCart earns revenue without buying or warehousing the inventory itself. That fits your asset-light model much better. The exact supplier price would still have to come from an actual distributor quote.
+
+And this gives you a strong answer if the chairman asks “Why would the distributor accept the lower price?”: the distributor isn't necessarily sacrificing profitability in the same proportion as the price reduction. PoolCart is proposing to give them a larger, consolidated, more predictable order, with less fragmented selling/customer-acquisition effort and potentially more efficient delivery planning. In food distribution, where margins can be thin, those operational efficiencies matter.
+
+The app itself should therefore display something like “Standard business price → pooled supplier price → PoolCart fee → estimated final price → estimated saving” rather than just “15% discount.” It should also say “Final price confirmed when the 48-hour pool closes”, because the final discount depends on the total pooled quantity. That makes the price changing look like an intentional feature of the business model rather than a coding gimmick.
+
+I’d also completely remove the current fake BHD 146.80 savings/revenue-type figures unless you have real pilot data. A tough chairman is much more likely to respect “Illustrative pricing — final supplier quotes determine actual savings” than a suspiciously precise number with no evidence.
+
+If you want, I can now regenerate the entire index.html with this proper pricing/margin engine built into the app—including realistic volume tiers, PoolCart's 3% commission, retailer savings, supplier price, and a professional price breakdown that changes when the pool grows.
+
+No, I meant like for the demo and logic, do let the actual current price is maybe, let's compare it with the retail price. Something like that, like what is the current price of wheat flour. You're getting around 250-300 fils per kg. So that is around 600 fils Standard two kg bag is the supermarket. So that means wholesalers might be getting it around maybe 200 fils per kilogram. So according we need to, website. As in, if you for all of them, they should be similar somewhat similar, and then we should easily be able to cope, why our discount is very useful.
+
+Ahhh, yes — now I understand exactly what you mean. You want the demo prices to feel like actual Bahrain grocery economics, so when the chairman looks at Flour, Rice, Onions, etc., the numbers aren't random.
+
+I checked current Bahrain retail listings. Your flour example is actually pretty close for basic flour: Al-Matahin all-purpose flour is currently around BHD 0.590 for 2 kg, or about 295 fils/kg, and a February 2026 Bahrain market survey found general household flour at roughly 240–510 fils/kg depending on type/brand.
+
+The important distinction is that retail prices are verifiable; actual distributor/wholesale acquisition prices usually aren't publicly posted. So we shouldn't pretend we know them. For the prototype, we can make the wholesale numbers clearly labeled “illustrative supplier quote” and derive sensible values below observed retail prices.
+
+For example, I would build the demo roughly like this:
+
+Product	Current Bahrain retail reference	Illustrative small-business price	PoolCart max-tier price	Saving vs retail
+Flour	~295 fils/kg	250 fils/kg	210 fils/kg	~29%
+Onions	~375–720 fils/kg	350 fils/kg	300 fils/kg	varies
+Potatoes	~390 fils/kg	350 fils/kg	300 fils/kg	~23%
+Tomatoes	~490–590 fils/kg	500 fils/kg	425 fils/kg	~15–28%
+Rice	~830 fils/kg	750 fils/kg	650 fils/kg	~22%
+Sunflower oil	~BHD 1.89/1.5 L	BHD 1.70/1.5 L	BHD 1.50/1.5 L	~21%
+
+Those retail anchors are in the right ballpark from current Bahrain listings: onions are BHD 0.375/kg at Alosra while Lulu lists some onion products considerably higher; potatoes are about BHD 0.390/kg at Lulu; tomatoes around BHD 0.490–0.590/kg; Sunwhite rice is currently BHD 0.830/kg at Lulu/Hypermax; and Noor sunflower oil is BHD 1.890/1.5 L at Lulu.
+
+And this is actually way stronger for the website than saying simply:
+
+“15% discount”
+
+The product page should instead visually show something like:
+
+FLOUR — 1 KG
+
+Retail reference
+BHD 0.295
+
+Typical small-order business price (illustrative)
+BHD 0.250
+
+PoolCart current pooled price
+BHD 0.220
+
+Maximum pool price
+BHD 0.210
+
+You save ~29% vs retail reference
+
+Then underneath:
+
+Why is it cheaper?
+“PoolCart combines many small orders into one high-volume purchase, allowing participating businesses to access volume-based supplier pricing.”
+
+That is much easier for you to explain.
+
+There is another nice piece of real-world evidence for the concept: the same Sunwhite 1 kg rice currently ranges from BHD 0.830 to BHD 0.980 across Bahrain supermarkets — an 18% difference between the lowest and highest price. The 5 kg pack ranges from BHD 3.940 to BHD 4.550. So even before talking about wholesale aggregation, there's already meaningful variation in Bahrain grocery pricing.
+
+One thing I would NOT do
+
+Don't label our estimated 210 fils flour number as “Wholesale Price.”
+
+The chairman could immediately say:
+
+“Which wholesaler quoted you 210 fils?”
+
+And then we're stuck. 😭
+
+Instead label it:
+
+“Illustrative pooled supplier price”
+
+and put a tiny note:
+
+“Prototype pricing based on observed Bahrain retail benchmarks. Final prices depend on participating distributor quotations and pooled order volume.”
+
+Now the numbers demonstrate the business model without pretending we already negotiated a distributor contract.
+
+And I think we should actually change the website logic again. Instead of the current generic calculation, each of the 6 products should have its own Bahrain retail benchmark, small-order price, current PoolCart price, max-tier price, and fils/kg or BHD/unit comparison. When you increase the pool from 40% → 60% → 85% → 100%, the actual unit price should visibly fall.
+
+That would make the demo much more convincing because the chairman can literally watch Flour: 250 fils → 235 → 220 → 210 fils/kg as purchasing volume increases, rather than watching an arbitrary percentage bar.
+
+So update the website code.
+
+Updated. I changed the website so the pricing logic now feels much more practical and defensible.
+
+The product pages now show four different price levels: a retail reference, an illustrative small-business price, the current PoolCart pooled price, and the maximum-tier pooled price. The discount is now calculated against the retail reference instead of using a random generic percentage.
+
+For example, Flour now behaves roughly like this: retail reference around 295 fils/kg, illustrative small-business price 250 fils/kg, then pooled pricing drops through 235 → 225 → 215 → 210 fils/kg as volume rises. The other products have their own separate realistic-looking pricing logic too.
+
+I also changed the cart so the total is calculated using the actual selected product’s current pooled unit price, not a universal BHD 0.50/kg assumption.
+
+Download the updated PoolCart website
+
+Replace your current GitHub index.html with this one. Keep poolcart-logo.jpg unchanged.
+
+One important detail: the website clearly labels the supplier/business prices as illustrative prototype pricing, so if the chairman challenges you, you’re not claiming those are confirmed distributor quotations. 
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>PoolCart Prototype</title>
-
-
-<!-- LEAFLET MAP -->
-
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
-</script>
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PoolCart</title>
 
 <style>
-
-/* ======================================================
-   GLOBAL
-====================================================== */
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
+:root{
+  --navy:#0d2f3d;
+  --teal:#0d8f9c;
+  --teal-soft:#e9f7f8;
+  --green:#1a8f63;
+  --green-soft:#eaf7f1;
+  --amber:#a66b11;
+  --amber-soft:#fff5e6;
+  --text:#18313b;
+  --muted:#6e7e85;
+  --line:#e6edef;
+  --bg:#f5f8f9;
+  --white:#ffffff;
+  --shadow:0 8px 28px rgba(20,49,61,.08);
 }
 
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-
-  background:
-  linear-gradient(
-    135deg,
-    #e9f7fa,
-    #dff3f7
-  );
-
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:#eef3f4;
+  color:var(--text);
   display:flex;
   justify-content:center;
-
-  padding:25px 10px;
-
-  color:#123447;
+  padding:24px 12px;
 }
+button,input{font:inherit}
 
-button{
-  font-family:inherit;
-}
-
-
-/* ======================================================
-   PHONE
-====================================================== */
-
-.phone{
-
-  width:390px;
-
-  min-height:820px;
-
-  background:#f8fcfd;
-
-  border-radius:32px;
-
+.app{
+  width:min(420px,100%);
+  min-height:860px;
+  background:var(--bg);
+  border-radius:28px;
   overflow:hidden;
-
-  box-shadow:
-  0 22px 60px
-  rgba(0,50,70,.20);
-
+  box-shadow:0 18px 55px rgba(20,49,61,.16);
   position:relative;
 }
 
-
-/* ======================================================
-   SCREENS
-====================================================== */
-
-.screen{
-
-  display:none;
-
-  min-height:820px;
-
-  padding-bottom:90px;
-}
-
-.screen.active{
-  display:block;
-}
-
-
-/* ======================================================
-   HEADER
-====================================================== */
+.screen{display:none;min-height:860px;padding-bottom:78px}
+.screen.active{display:block}
 
 .header{
-
-  background:
-  linear-gradient(
-    135deg,
-    #004f6a,
-    #008da2,
-    #00aab5
-  );
-
-  color:white;
-
-  padding:
-  25px
-  20px
-  28px;
+  background:var(--white);
+  padding:20px 18px 16px;
+  border-bottom:1px solid var(--line);
 }
 
-
-.logo-row{
-
+.brand{
   display:flex;
-
   align-items:center;
-
-  gap:11px;
+  gap:10px;
 }
-
-
-.logo-row img{
-
-  width:48px;
-
-  height:48px;
-
+.brand img{
+  width:42px;
+  height:42px;
   object-fit:contain;
-
-  border-radius:12px;
-
-  background:white;
-
-  padding:4px;
+  border-radius:10px;
+  background:#fff;
 }
-
-
-.logo-text{
-
-  font-size:24px;
-
+.brand-name{
+  font-size:20px;
   font-weight:800;
+  letter-spacing:-.3px;
 }
-
-
-.tagline{
-
+.brand-sub{
   font-size:10px;
-
-  opacity:.85;
-
+  color:var(--muted);
   margin-top:2px;
 }
-
-
-.hero{
-
-  margin-top:22px;
+.prototype{
+  margin-left:auto;
+  font-size:9px;
+  font-weight:700;
+  color:#48636d;
+  border:1px solid var(--line);
+  background:#f7fafb;
+  padding:6px 8px;
+  border-radius:999px;
 }
 
-
-.hero h1{
-
-  font-size:25px;
+.page-title{
+  margin-top:20px;
+}
+.page-title h1{
+  font-size:24px;
+  line-height:1.1;
+  letter-spacing:-.5px;
+}
+.page-title p{
+  margin-top:7px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.5;
 }
 
-
-.hero p{
-
-  font-size:13px;
-
-  opacity:.9;
-
-  margin-top:5px;
-}
-
-
-/* ======================================================
-   SEARCH
-====================================================== */
-
-.search{
-
-  margin-top:18px;
-
-  background:white;
-
-  border-radius:14px;
-
-  padding:12px 14px;
-
-  display:flex;
-
-  align-items:center;
-
-  gap:8px;
-
-  box-shadow:
-  0 5px 15px
-  rgba(0,40,60,.08);
-}
-
-
-.search input{
-
-  width:100%;
-
-  border:none;
-
-  outline:none;
-
-  font-size:13px;
-}
-
-
-/* ======================================================
-   GENERAL CONTENT
-====================================================== */
-
-.content{
-
-  padding:20px;
-}
-
+.content{padding:18px}
 
 .card{
-
-  background:white;
-
-  border-radius:18px;
-
-  padding:16px;
-
-  margin-bottom:14px;
-
-  box-shadow:
-  0 6px 18px
-  rgba(0,60,80,.07);
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:15px;
+  margin-bottom:12px;
+  box-shadow:var(--shadow);
 }
 
-
-.title-row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:14px;
+.section-title{
+  font-size:16px;
+  font-weight:800;
+  margin-bottom:10px;
 }
-
-
-.title-row h2{
-
-  font-size:18px;
-}
-
-
-.small-link{
-
-  color:#008c99;
-
-  font-size:12px;
-
-  font-weight:bold;
-}
-
-
-.subtext{
-
-  color:#71828b;
-
+.section-caption{
   font-size:11px;
+  color:var(--muted);
+  line-height:1.5;
+  margin-top:-5px;
+  margin-bottom:12px;
+}
 
+.summary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:14px;
+}
+.summary{
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:13px;
+}
+.summary-label{
+  font-size:10px;
+  color:var(--muted);
+}
+.summary-value{
+  font-size:18px;
+  font-weight:800;
   margin-top:4px;
 }
-
-
-.back{
-
-  display:inline-block;
-
-  margin-bottom:17px;
-
-  cursor:pointer;
-
-  font-size:14px;
-
-  font-weight:bold;
-}
-
-
-/* ======================================================
-   BUTTONS
-====================================================== */
-
-.btn{
-
-  width:100%;
-
-  padding:13px;
-
-  margin-top:13px;
-
-  border:none;
-
-  border-radius:12px;
-
-  background:#007f91;
-
-  color:white;
-
-  font-size:13px;
-
-  font-weight:bold;
-
-  cursor:pointer;
-
-  transition:.2s;
-}
-
-
-.btn:hover{
-
-  background:#006d7d;
-
-  transform:translateY(-1px);
-}
-
-
-.btn.secondary{
-
-  background:#e0f4f6;
-
-  color:#006c78;
-}
-
-
-.btn.dark{
-
-  background:#092f49;
-}
-
-
-/* ======================================================
-   SAVINGS
-====================================================== */
-
-.savings{
-
-  background:
-  linear-gradient(
-    135deg,
-    #082f49,
-    #006d83
-  );
-
-  color:white;
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-}
-
-
-.savings small{
-
-  opacity:.75;
-}
-
-
-.savings strong{
-
-  display:block;
-
-  font-size:27px;
-
+.summary-note{
+  font-size:9px;
+  color:var(--muted);
   margin-top:3px;
 }
 
-
-.badge{
-
-  background:#d9fae9;
-
-  color:#128754;
-
-  padding:7px 10px;
-
-  border-radius:10px;
-
-  font-size:11px;
-
-  font-weight:bold;
+.search{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 12px;
+  margin-bottom:14px;
+}
+.search input{
+  border:0;
+  outline:0;
+  width:100%;
+  background:transparent;
+  font-size:12px;
 }
 
-
-/* ======================================================
-   PRODUCT CARDS
-====================================================== */
-
-.product-top{
-
+.tabs{
   display:flex;
+  gap:8px;
+  overflow:auto;
+  margin-bottom:14px;
+}
+.tab{
+  border:1px solid var(--line);
+  background:#fff;
+  color:#526971;
+  padding:7px 11px;
+  border-radius:999px;
+  font-size:10px;
+  font-weight:700;
+  white-space:nowrap;
+}
+.tab.active{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
 
+.pool-card{cursor:pointer}
+.pool-top{
+  display:flex;
   justify-content:space-between;
-
   gap:10px;
+  align-items:flex-start;
 }
-
-
-.product-info{
-
+.product{
   display:flex;
-
-  gap:11px;
-
+  gap:10px;
   align-items:center;
 }
-
-
-.product-icon{
-
-  width:52px;
-
-  height:52px;
-
-  border-radius:14px;
-
-  background:#e1f7f5;
-
+.icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:var(--teal-soft);
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:27px;
+  font-size:22px;
 }
-
-
-.product-name{
-
-  font-size:16px;
-
+.product-name{font-size:14px;font-weight:800}
+.product-meta{font-size:10px;color:var(--muted);margin-top:3px}
+.discount{
+  font-size:9px;
+  color:var(--green);
+  background:var(--green-soft);
+  border-radius:8px;
+  padding:6px 8px;
+  font-weight:800;
+}
+.progress-row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:13px;
+  font-size:10px;
+  font-weight:700;
+}
+.progress{
+  height:8px;
+  background:#edf2f3;
+  border-radius:999px;
+  overflow:hidden;
+  margin-top:6px;
+}
+.bar{
+  height:100%;
+  background:var(--teal);
+  border-radius:999px;
+}
+.pool-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-top:10px;
+}
+.timer{
+  font-size:9px;
+  color:var(--amber);
+  background:var(--amber-soft);
+  padding:6px 8px;
+  border-radius:8px;
+  font-weight:700;
+}
+.link-btn{
+  border:0;
+  background:none;
+  color:var(--teal);
+  font-size:10px;
   font-weight:800;
 }
 
-
-.discount{
-
-  background:#dff8eb;
-
-  color:#11814d;
-
-  padding:6px 8px;
-
-  border-radius:9px;
-
-  height:max-content;
-
-  font-size:10px;
-
-  font-weight:bold;
-}
-
-
-/* ======================================================
-   PROGRESS BAR
-====================================================== */
-
-.progress-row{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  font-size:11px;
-
-  font-weight:bold;
-
-  margin-top:15px;
-}
-
-
-.progress{
-
-  height:10px;
-
-  background:#dbecef;
-
-  border-radius:20px;
-
-  overflow:hidden;
-
-  margin-top:7px;
-}
-
-
-.bar{
-
-  height:100%;
-
-  background:
-  linear-gradient(
-    90deg,
-    #00a7b4,
-    #36d39a
-  );
-
-  transition:
-  width .5s ease;
-}
-
-
-/* ======================================================
-   TIMER
-====================================================== */
-
-.timer{
-
-  margin-top:11px;
-
+.back{
   display:inline-block;
-
-  padding:7px 10px;
-
-  border-radius:9px;
-
-  background:#fff2da;
-
-  color:#875c00;
-
-  font-size:10px;
-
-  font-weight:bold;
+  font-size:11px;
+  font-weight:700;
+  color:var(--teal);
+  cursor:pointer;
+  margin-bottom:14px;
 }
 
-
-/* ======================================================
-   DETAIL SCREEN
-====================================================== */
-
-.big-product{
-
+.detail-hero{
   text-align:center;
-
-  padding:20px 10px;
 }
-
-
-.big-icon{
-
-  width:90px;
-
-  height:90px;
-
-  border-radius:25px;
-
-  margin:
-  0 auto 12px;
-
-  background:#e2f7f3;
-
+.detail-icon{
+  width:72px;
+  height:72px;
+  border-radius:18px;
+  background:var(--teal-soft);
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:48px;
-}
-
-
-.big-product h2{
-
-  font-size:25px;
-}
-
-
-.big-percent{
-
-  color:#008e9c;
-
   font-size:36px;
-
-  font-weight:900;
-
-  margin:
-  12px 0 4px;
+  margin:0 auto 10px;
 }
-
-
-.info-grid{
-
-  display:grid;
-
-  grid-template-columns:
-  1fr 1fr;
-
-  gap:10px;
-
-  margin-top:16px;
+.detail-name{
+  font-size:21px;
+  font-weight:800;
 }
-
-
-.info-box{
-
-  background:#edf9fa;
-
-  padding:12px;
-
-  border-radius:13px;
-}
-
-
-.info-box small{
-
-  color:#748791;
-}
-
-
-.info-box strong{
-
-  display:block;
-
+.detail-meta{
+  font-size:10px;
+  color:var(--muted);
   margin-top:4px;
 }
-
-
-/* ======================================================
-   REAL BAHRAIN MAP
-====================================================== */
-
-#bahrainMap{
-
-  width:100%;
-
-  height:350px;
-
-  border-radius:17px;
-
-  overflow:hidden;
-
+.big-percent{
+  font-size:34px;
+  font-weight:850;
+  color:var(--teal);
   margin-top:12px;
-
-  z-index:1;
 }
 
+.info-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+}
+.info{
+  background:#f7fafb;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+}
+.info label{
+  display:block;
+  font-size:9px;
+  color:var(--muted);
+}
+.info strong{
+  display:block;
+  margin-top:3px;
+  font-size:14px;
+}
 
-.map-heading{
-
+.tier{
   display:flex;
-
   justify-content:space-between;
-
   align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:11px;
+}
+.tier:last-child{border-bottom:0}
+.tier span:last-child{font-weight:800}
+.current-tier{
+  color:var(--teal);
 }
 
-
-.live-dot{
-
-  display:inline-block;
-
-  width:7px;
-
-  height:7px;
-
-  background:#12bc78;
-
-  border-radius:50%;
-
-  margin-right:4px;
-
-  animation:
-  livePulse 1.5s infinite;
+.explainer{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:8px;
 }
-
-
-@keyframes livePulse{
-
-  0%{
-    opacity:.4;
-  }
-
-  50%{
-    opacity:1;
-  }
-
-  100%{
-    opacity:.4;
-  }
-
-}
-
-
-/* CUSTOM MAP MARKERS */
-
-.shop-marker{
-
-  width:38px;
-
-  height:38px;
-
-  background:white;
-
-  border-radius:50%;
-
+.explainer-step{
   display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  font-size:20px;
-
-  box-shadow:
-  0 4px 13px
-  rgba(0,60,80,.25);
-
-  border:
-  3px solid
-  #00a1af;
+  gap:10px;
+  align-items:flex-start;
+  padding:10px;
+  background:#f8fafb;
+  border-radius:12px;
 }
-
-
-.pool-marker{
-
-  width:55px;
-
-  height:55px;
-
+.step-num{
+  width:24px;
+  height:24px;
   border-radius:50%;
-
-  background:#007f91;
-
-  color:white;
-
+  background:var(--navy);
+  color:#fff;
+  font-size:10px;
   display:flex;
-
-  flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
-
-  font-size:21px;
-
-  border:
-  4px solid white;
-
-  box-shadow:
-  0 5px 18px
-  rgba(0,60,80,.35);
+  flex-shrink:0;
+  font-weight:800;
 }
+.step-title{font-size:11px;font-weight:800}
+.step-text{font-size:10px;color:var(--muted);margin-top:2px;line-height:1.45}
 
-
-.pool-marker small{
-
-  font-size:7px;
-
-  font-weight:bold;
+.btn{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:12px 14px;
+  margin-top:10px;
+  font-weight:800;
+  font-size:11px;
 }
+.btn.primary{background:var(--navy);color:#fff}
+.btn.secondary{background:var(--teal-soft);color:var(--teal)}
+.btn.outline{background:#fff;border:1px solid var(--line);color:var(--text)}
 
-
-/* ======================================================
-   ACTIVITY
-====================================================== */
-
+.activity-list{display:grid;gap:8px}
 .activity{
-
   display:flex;
-
   justify-content:space-between;
-
-  padding:11px 0;
-
-  border-bottom:
-  1px solid
-  #e6eeee;
-
-  font-size:12px;
+  gap:12px;
+  padding:10px 0;
+  border-bottom:1px solid var(--line);
+  font-size:10px;
 }
+.activity:last-child{border-bottom:0}
+.activity strong{color:var(--green)}
 
-
-.activity:last-child{
-
-  border-bottom:none;
-}
-
-
-.activity strong{
-
-  color:#0b8b58;
-}
-
-
-/* ======================================================
-   QUANTITY
-====================================================== */
-
-.quantity-box{
-
+.quantity{
   display:flex;
-
-  justify-content:center;
-
   align-items:center;
-
+  justify-content:center;
   gap:20px;
-
-  margin:22px 0;
+  margin:18px 0;
 }
-
-
 .qty-btn{
-
-  width:42px;
-
-  height:42px;
-
-  border:none;
-
+  width:38px;
+  height:38px;
   border-radius:50%;
-
-  background:#daf3f5;
-
-  color:#007684;
-
-  font-size:22px;
-
-  font-weight:bold;
-
-  cursor:pointer;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--navy);
+  font-size:20px;
 }
+.qty-value{font-size:28px;font-weight:800}
 
-
-.qty-number{
-
-  font-size:30px;
-
-  font-weight:900;
+.quick-qty{
+  display:flex;
+  gap:7px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
-
-
-/* ======================================================
-   PRICE
-====================================================== */
-
-.price-summary{
-
-  line-height:2;
+.quick-qty button{
+  border:1px solid var(--line);
+  background:#fff;
+  padding:7px 10px;
+  border-radius:9px;
+  font-size:9px;
+  font-weight:700;
 }
-
 
 .price-line{
-
   display:flex;
-
   justify-content:space-between;
+  padding:7px 0;
+  font-size:11px;
+}
+.price-line.total{
+  border-top:1px solid var(--line);
+  margin-top:6px;
+  padding-top:11px;
+  font-size:13px;
+  font-weight:800;
 }
 
-
-.total{
-
-  border-top:
-  1px solid
-  #dce9eb;
-
-  margin-top:8px;
-
-  padding-top:8px;
-
-  font-weight:bold;
-}
-
-
-/* ======================================================
-   TRACKING
-====================================================== */
-
-.order-card{
-
-  text-align:center;
-}
-
-
-.status-icon{
-
-  width:75px;
-
-  height:75px;
-
-  border-radius:50%;
-
-  background:#dff8eb;
-
-  color:#168b58;
-
-  margin:
-  0 auto 12px;
-
+.timeline{margin-top:8px}
+.timeline-item{
   display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:34px;
+  gap:10px;
+  margin-bottom:15px;
 }
-
-
-.timeline{
-
-  margin-top:20px;
-}
-
-
-.step{
-
-  display:flex;
-
-  gap:13px;
-
-  margin-bottom:20px;
-}
-
-
 .dot{
-
-  width:18px;
-
-  height:18px;
-
+  width:14px;
+  height:14px;
   border-radius:50%;
-
-  background:#d8e4e6;
-
+  background:#dbe4e6;
   margin-top:2px;
-
   flex-shrink:0;
 }
+.dot.done{background:var(--green)}
+.dot.current{background:var(--teal)}
+.timeline-item b{font-size:11px}
+.timeline-item p{font-size:9px;color:var(--muted);margin-top:2px}
 
-
-.dot.done{
-
-  background:#18b875;
-}
-
-
-.dot.current{
-
-  background:#00a0af;
-}
-
-
-.step-text strong{
-
-  display:block;
-}
-
-
-.step-text span{
-
-  font-size:11px;
-
-  color:#71838c;
-}
-
-
-/* ======================================================
-   BOTTOM NAVIGATION
-====================================================== */
-
-.nav{
-
-  position:absolute;
-
-  bottom:0;
-
-  width:100%;
-
-  height:72px;
-
-  border-top:
-  1px solid
-  #e3edef;
-
-  background:white;
-
-  display:flex;
-
-  justify-content:space-around;
-
-  align-items:center;
-}
-
-
-.nav-item{
-
-  text-align:center;
-
+.notice{
+  background:#f8fafb;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
   font-size:10px;
+  color:var(--muted);
+  line-height:1.5;
+}
 
-  color:#7d8c94;
-
+.bottom-nav{
+  position:absolute;
+  bottom:0;
+  left:0;
+  right:0;
+  height:70px;
+  background:#fff;
+  border-top:1px solid var(--line);
+  display:flex;
+  align-items:center;
+  justify-content:space-around;
+}
+.nav-item{
+  width:25%;
+  text-align:center;
+  font-size:9px;
+  color:#7d8b91;
   cursor:pointer;
 }
+.nav-item .nav-icon{
+  font-size:18px;
+  margin-bottom:2px;
+}
+.nav-item.active{color:var(--teal);font-weight:800}
 
-
-.nav-item div{
-
-  font-size:20px;
-
-  margin-bottom:3px;
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--navy);
+  color:#fff;
+  padding:10px 13px;
+  border-radius:10px;
+  font-size:10px;
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
 }
 
 
-.nav-item.active{
-
-  color:#007d8d;
-
-  font-weight:bold;
+.price-compare{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:9px;
+  margin-top:12px;
+}
+.price-box{
+  background:#f7fafb;
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:11px;
+}
+.price-box.highlight{
+  background:var(--green-soft);
+  border-color:#cfeadd;
+}
+.price-label{
+  font-size:9px;
+  color:var(--muted);
+}
+.price-value{
+  font-size:17px;
+  font-weight:850;
+  margin-top:4px;
+}
+.price-note{
+  font-size:9px;
+  color:var(--muted);
+  margin-top:4px;
+  line-height:1.4;
+}
+.saving-strip{
+  margin-top:10px;
+  background:#eef8f4;
+  color:var(--green);
+  border:1px solid #d7eee3;
+  border-radius:10px;
+  padding:10px 11px;
+  font-size:10px;
+  font-weight:800;
 }
 
-
-/* ======================================================
-   MAX DISCOUNT
-====================================================== */
-
-.success-card{
-
-  background:
-  linear-gradient(
-    135deg,
-    #dff9ec,
-    #effff7
-  );
-
-  border:
-  1px solid
-  #b5efd2;
-
-  display:none;
-
-  text-align:center;
+@media(max-width:480px){
+  body{padding:0;background:var(--bg)}
+  .app{width:100%;min-height:100vh;border-radius:0}
+  .screen{min-height:100vh}
 }
-
-
-.success-card h3{
-
-  color:#0c8a53;
-
-  margin-bottom:5px;
-}
-
 </style>
-
 </head>
-
-
 <body>
 
-
-<div class="phone">
-
-
-<!-- =====================================================
-     SCREEN 1: HOME
-===================================================== -->
-
-<div
-  id="home"
-  class="screen active"
->
-
-
-<div class="header">
-
-
-<div class="logo-row">
-
-<img
-  src="poolcart-logo.jpg"
-  alt="PoolCart Logo"
-/>
-
-<div>
-
-<div class="logo-text">
-PoolCart
-</div>
-
-<div class="tagline">
-Grow Margins, Together.
-</div>
-
-</div>
-
-</div>
-
-
-<div class="hero">
-
-<h1>
-Good morning 👋
-</h1>
-
-<p>
-Pool orders. Unlock better wholesale prices.
-</p>
-
-</div>
-
-
-<div class="search">
-
-🔍
-
-<input
-  id="searchInput"
-  placeholder="Search products..."
-  onkeyup="searchProducts()"
-/>
-
-</div>
-
-
-</div>
-
-
-<div class="content">
-
-
-<div class="card savings">
-
-<div>
-
-<small>
-Your PoolCart Savings
-</small>
-
-<strong>
-BHD 146.80
-</strong>
-
-</div>
-
-
-<span class="badge">
-18% saved
-</span>
-
-</div>
-
-
-<div class="title-row">
-
-<h2>
-Active Pools
-</h2>
-
-<span class="small-link">
-View all
-</span>
-
-</div>
-
-
-<!-- ONION POOL -->
-
-<div
-  class="card product-card"
-  data-name="onions"
->
-
-
-<div class="product-top">
-
-
-<div class="product-info">
-
-
-<div class="product-icon">
-🧅
-</div>
-
-
-<div>
-
-<div class="product-name">
-Onions
-</div>
-
-<div class="subtext">
-
-<span id="homeVolume">
-850
-</span>
-
-kg pooled
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="discount">
-SAVE 18%
-</div>
-
-
-</div>
-
-
-<div class="progress-row">
-
-<span id="homeProgressText">
-85% to max discount
-</span>
-
-<span id="homePercent">
-85%
-</span>
-
-</div>
-
-
-<div class="progress">
-
-<div
-  id="homeBar"
-  class="bar"
-  style="width:85%">
-</div>
-
-</div>
-
-
-<div class="timer">
-
-⏱
-
-<span id="homeTimer">
-31:42:16
-</span>
-
-remaining
-
-</div>
-
-
-<button
-  class="btn"
-  onclick="showScreen('detail')"
->
-
-View Pool
-
-</button>
-
-
-</div>
-
-
-
-<!-- FLOUR -->
-
-<div
-  class="card product-card"
-  data-name="flour"
->
-
-
-<div class="product-top">
-
-
-<div class="product-info">
-
-<div class="product-icon">
-🌾
-</div>
-
-
-<div>
-
-<div class="product-name">
-Flour
-</div>
-
-<div class="subtext">
-600 kg pooled
-</div>
-
-</div>
-
-
-</div>
-
-
-<div class="discount">
-SAVE 12%
-</div>
-
-
-</div>
-
-
-<div class="progress-row">
-
-<span>
-60% to max discount
-</span>
-
-<span>
-60%
-</span>
-
-</div>
-
-
-<div class="progress">
-
-<div
-  class="bar"
-  style="width:60%">
-</div>
-
-</div>
-
-
-</div>
-
-
-
-<!-- RICE -->
-
-<div
-  class="card product-card"
-  data-name="rice"
->
-
-
-<div class="product-top">
-
-
-<div class="product-info">
-
-<div class="product-icon">
-🍚
-</div>
-
-
-<div>
-
-<div class="product-name">
-Rice
-</div>
-
-<div class="subtext">
-400 kg pooled
-</div>
-
-</div>
-
-</div>
-
-
-<div class="discount">
-SAVE 8%
-</div>
-
-
-</div>
-
-
-<div class="progress-row">
-
-<span>
-40% to max discount
-</span>
-
-<span>
-40%
-</span>
-
-</div>
-
-
-<div class="progress">
-
-<div
-  class="bar"
-  style="width:40%">
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SCREEN 2: POOL DETAILS
-===================================================== -->
-
-<div
-  id="detail"
-  class="screen"
->
-
-
-<div class="header">
-
-
-<span
-  class="back"
-  onclick="showScreen('home')"
->
-
-← Back
-
-</span>
-
-
-<div class="logo-row">
-
-
-<img
-  src="poolcart-logo.jpg"
-  alt="PoolCart Logo"
-/>
-
-
-<div>
-
-<div class="logo-text">
-Pool Details
-</div>
-
-<div class="tagline">
-Live Group Order
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-<div class="content">
-
-
-<div class="card big-product">
-
-
-<div class="big-icon">
-🧅
-</div>
-
-
-<h2>
-Onion Pool
-</h2>
-
-
-<p class="subtext">
-Bahrain-Wide Group Order
-</p>
-
-
-<div
-  id="detailPercent"
-  class="big-percent"
->
-
-85%
-
-</div>
-
-
-<p>
-toward maximum discount
-</p>
-
-
-<div class="progress">
-
-<div
-  id="detailBar"
-  class="bar"
-  style="width:85%">
-</div>
-
-</div>
-
-
-<div class="timer">
-
-⏱
-
-<span id="detailTimer">
-31:42:16
-</span>
-
-remaining
-
-</div>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Pool Details
-</h3>
-
-
-<div class="info-grid">
-
-
-<div class="info-box">
-
-<small>
-Current Volume
-</small>
-
-<strong>
-
-<span id="detailVolume">
-850
-</span>
-
-kg
-
-</strong>
-
-</div>
-
-
-<div class="info-box">
-
-<small>
-Target Volume
-</small>
-
-<strong>
-1,000 kg
-</strong>
-
-</div>
-
-
-<div class="info-box">
-
-<small>
-Current Saving
-</small>
-
-<strong>
-15%
-</strong>
-
-</div>
-
-
-<div class="info-box">
-
-<small>
-Max Saving
-</small>
-
-<strong>
-18%
-</strong>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-How This Pool Works
-</h3>
-
-
-<p
-  class="subtext"
-  style="
-  line-height:1.7;
-  margin-top:8px;"
->
-
-Orders from participating retailers and restaurants
-are combined during a 48-hour pool window.
-
-<br><br>
-
-When the pool closes, the final aggregate quantity
-determines the wholesale discount tier.
-
-</p>
-
-
-</div>
-
-
-
-<button
-  class="btn"
-  onclick="showScreen('cart')"
->
-
-Join This Pool
-
-</button>
-
-
-<button
-  class="btn secondary"
-  onclick="showScreen('map')"
->
-
-🗺 View Live Bahrain Pool Map
-
-</button>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SCREEN 3: REAL BAHRAIN MAP
-===================================================== -->
-
-<div
-  id="map"
-  class="screen"
->
-
-
-<div class="header">
-
-
-<span
-  class="back"
-  onclick="showScreen('detail')"
->
-
-← Pool Details
-
-</span>
-
-
-<div class="logo-row">
-
-
-<img
-  src="poolcart-logo.jpg"
-  alt="PoolCart Logo"
-/>
-
-
-<div>
-
-<div class="logo-text">
-Live Pool Map
-</div>
-
-<div class="tagline">
-Bahrain-Wide Group Buying
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-<div class="content">
-
-
-<div class="card">
-
-
-<div class="map-heading">
-
-
-<h2>
-Onion Pool
-</h2>
-
-
-<span class="badge">
-
-<span class="live-dot">
-</span>
-
-LIVE
-
-</span>
-
-
-</div>
-
-
-<div
-  id="mapPercent"
-  class="big-percent"
->
-
-85%
-
-</div>
-
-
-<p class="subtext">
-toward maximum wholesale discount
-</p>
-
-
-<div class="progress">
-
-<div
-  id="mapProgress"
-  class="bar"
-  style="width:85%">
-</div>
-
-</div>
-
-
-<div class="progress-row">
-
-<span id="joinedCount">
-17 businesses joined
-</span>
-
-<span id="remainingText">
-15% remaining
-</span>
-
-</div>
-
-
-</div>
-
-
-
-<div
-  id="maxUnlocked"
-  class="card success-card"
->
-
-
-<h3>
-🎉 Maximum Discount Unlocked!
-</h3>
-
-
-<p class="subtext">
-
-The participating businesses have collectively
-reached the target volume.
-
-</p>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Businesses Joining Across Bahrain
-</h3>
-
-
-<div id="bahrainMap">
-</div>
-
-
-<p
-  class="subtext"
-  style="
-  line-height:1.6;
-  margin-top:12px;"
->
-
-Each marker represents a participating retailer
-or restaurant contributing to the shared pool.
-
-</p>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Live Activity
-</h3>
-
-
-<div id="activityList">
-
-
-<div class="activity">
-
-<span>
-🏪 Manama Grocery
-</span>
-
-<strong>
-+40 kg
-</strong>
-
-</div>
-
-
-<div class="activity">
-
-<span>
-🍽️ Juffair Restaurant
-</span>
-
-<strong>
-+25 kg
-</strong>
-
-</div>
-
-
-<div class="activity">
-
-<span>
-🏪 Muharraq Market
-</span>
-
-<strong>
-+30 kg
-</strong>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Next Discount Target
-</h3>
-
-
-<p
-  class="subtext"
-  style="
-  line-height:1.6;
-  margin-top:8px;"
->
-
-More participating businesses can push the
-combined order toward the maximum wholesale
-discount tier.
-
-</p>
-
-
-<button
-  class="btn"
-  onclick="simulateJoin()"
->
-
-+ Simulate New Business Joining
-
-</button>
-
-
-</div>
-
-
-
-<button
-  class="btn dark"
-  onclick="showScreen('cart')"
->
-
-Join This Pool
-
-</button>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SCREEN 4: CART
-===================================================== -->
-
-<div
-  id="cart"
-  class="screen"
->
-
-
-<div class="header">
-
-
-<span
-  class="back"
-  onclick="showScreen('detail')"
->
-
-← Pool Details
-
-</span>
-
-
-<h2>
-Add to Pool
-</h2>
-
-
-<p
-  style="
-  font-size:12px;
-  margin-top:5px;"
->
-
-Choose your order quantity
-
-</p>
-
-
-</div>
-
-
-<div class="content">
-
-
-<div class="card big-product">
-
-
-<div class="big-icon">
-🧅
-</div>
-
-
-<h2>
-Onions
-</h2>
-
-
-<p class="subtext">
-Current pool saving: 15%
-</p>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3
-  style="
-  text-align:center;"
->
-
-Quantity
-
-</h3>
-
-
-<div class="quantity-box">
-
-
-<button
-  class="qty-btn"
-  onclick="changeQty(-10)"
->
-
-−
-
-</button>
-
-
-<div>
-
-<span
-  id="qty"
-  class="qty-number"
->
-
-50
-
-</span>
-
-<span>
-kg
-</span>
-
-</div>
-
-
-<button
-  class="qty-btn"
-  onclick="changeQty(10)"
->
-
-+
-
-</button>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="card price-summary">
-
-
-<div class="price-line">
-
-<span>
-Base Price
-</span>
-
-<strong id="basePrice">
-BHD 25.00
-</strong>
-
-</div>
-
-
-<div class="price-line">
-
-<span>
-Pool Saving
-</span>
-
-<strong
-  id="savingAmount"
-  style="color:#128653;"
->
-
-− BHD 3.75
-
-</strong>
-
-</div>
-
-
-<div class="price-line total">
-
-<span>
-Estimated Total
-</span>
-
-<strong id="estimatedTotal">
-BHD 21.25
-</strong>
-
-</div>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<strong>
-🎯 Your order helps the group
-</strong>
-
-
-<p
-  class="subtext"
-  style="
-  line-height:1.6;"
->
-
-Adding your quantity helps the pool move closer
-to the next wholesale discount tier.
-
-</p>
-
-
-</div>
-
-
-
-<button
-  class="btn"
-  onclick="placeOrder()"
->
-
-Confirm Pool Order
-
-</button>
-
-
-<button
-  class="btn secondary"
-  onclick="showScreen('detail')"
->
-
-Cancel
-
-</button>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SCREEN 5: ORDER TRACKING
-===================================================== -->
-
-<div
-  id="tracking"
-  class="screen"
->
-
-
-<div class="header">
-
-
-<div class="logo-row">
-
-
-<img
-  src="poolcart-logo.jpg"
-  alt="PoolCart Logo"
-/>
-
-
-<div>
-
-<div class="logo-text">
-Order Tracking
-</div>
-
-<div class="tagline">
-PoolCart
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="content">
-
-
-<div class="card order-card">
-
-
-<div class="status-icon">
-✓
-</div>
-
-
-<h2>
-Order Confirmed
-</h2>
-
-
-<p class="subtext">
-Your order has joined the Onion Pool.
-</p>
-
-
-<br>
-
-
-<strong>
-Order #PC1048
-</strong>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Order Status
-</h3>
-
-
-<div class="timeline">
-
-
-<div class="step">
-
-<div class="dot done">
-</div>
-
-<div class="step-text">
-
-<strong>
-Order Confirmed
-</strong>
-
-<span>
-Your order joined the pool.
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="dot current">
-</div>
-
-<div class="step-text">
-
-<strong>
-Pooling in Progress
-</strong>
-
-<span>
-Waiting for the 48-hour pool window to close.
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="dot">
-</div>
-
-<div class="step-text">
-
-<strong>
-Distributor Confirmed
-</strong>
-
-<span>
-Final aggregate quantity submitted.
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="dot">
-</div>
-
-<div class="step-text">
-
-<strong>
-Out for Delivery
-</strong>
-
-<span>
-Distributor is delivering directly to your store.
-</span>
-
-</div>
-
-</div>
-
-
-
-<div class="step">
-
-<div class="dot">
-</div>
-
-<div class="step-text">
-
-<strong>
-Delivered
-</strong>
-
-<span>
-Order completed.
-</span>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<div class="card">
-
-
-<h3>
-Order Summary
-</h3>
-
-
-<div class="price-summary">
-
-
-<div class="price-line">
-
-<span>
-Product
-</span>
-
-<strong>
-Onions
-</strong>
-
-</div>
-
-
-<div class="price-line">
-
-<span>
-Quantity
-</span>
-
-<strong id="orderQty">
-50 kg
-</strong>
-
-</div>
-
-
-<div class="price-line">
-
-<span>
-Pool Saving
-</span>
-
-<strong>
-15%
-</strong>
-
-</div>
-
-
-<div class="price-line">
-
-<span>
-Pool Window
-</span>
-
-<strong>
-48 Hours
-</strong>
-
-</div>
-
-
-<div class="price-line total">
-
-<span>
-Total
-</span>
-
-<strong id="orderTotal">
-BHD 21.25
-</strong>
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
-
-<button
-  class="btn dark"
-  onclick="showScreen('home')"
->
-
-Back to Home
-
-</button>
-
-
-</div>
-
-</div>
-
-
-
-<!-- =====================================================
-     NAVIGATION
-===================================================== -->
-
-<div class="nav">
-
-
-<div
-  class="nav-item active"
-  onclick="showScreen('home')"
->
-
-<div>
-🏠
-</div>
-
-Home
-
-</div>
-
-
-<div
-  class="nav-item"
-  onclick="showScreen('detail')"
->
-
-<div>
-🛒
-</div>
-
-Pools
-
-</div>
-
-
-<div
-  class="nav-item"
-  onclick="showScreen('tracking')"
->
-
-<div>
-📦
-</div>
-
-Orders
-
-</div>
-
-
-<div class="nav-item">
-
-<div>
-💰
-</div>
-
-Savings
-
-</div>
-
-
-<div class="nav-item">
-
-<div>
-👤
-</div>
-
-Profile
-
-</div>
-
-
-</div>
-
-
-</div>
-
-
+<div class="app">
+
+<!-- HOME -->
+<section id="home" class="screen active">
+  <div class="header">
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">PoolCart</div>
+        <div class="brand-sub">Grow Margins, Together.</div>
+      </div>
+      <div class="prototype">Prototype</div>
+    </div>
+
+    <div class="page-title">
+      <h1>Group buying for independent businesses</h1>
+      <p>Join active product pools and combine purchasing volume to reach stronger wholesale discount tiers.</p>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="summary-grid">
+      <div class="summary">
+        <div class="summary-label">Active pools</div>
+        <div class="summary-value">6</div>
+        <div class="summary-note">Prototype examples</div>
+      </div>
+      <div class="summary">
+        <div class="summary-label">Pool window</div>
+        <div class="summary-value">48 hrs</div>
+        <div class="summary-note">Per item pool</div>
+      </div>
+    </div>
+
+    <div class="search">
+      <span>⌕</span>
+      <input id="searchInput" placeholder="Search products" oninput="renderPools()">
+    </div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="setCategory('all',this)">All</button>
+      <button class="tab" onclick="setCategory('fresh',this)">Fresh produce</button>
+      <button class="tab" onclick="setCategory('staples',this)">Staples</button>
+      <button class="tab" onclick="setCategory('restaurant',this)">Restaurant supplies</button>
+    </div>
+
+    <div class="section-title">Active pools</div>
+    <div id="poolList"></div>
+  </div>
+</section>
+
+<!-- POOL DETAILS -->
+<section id="detail" class="screen">
+  <div class="header">
+    <div class="back" onclick="showScreen('home')">← Back to pools</div>
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">Pool details</div>
+        <div class="brand-sub">Current group-buying status</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="card detail-hero">
+      <div class="detail-icon" id="detailIcon">🧅</div>
+      <div class="detail-name" id="detailName">Onions</div>
+      <div class="detail-meta" id="detailArea">Bahrain-wide demo pool</div>
+      <div class="big-percent" id="detailPercent">85%</div>
+      <div class="detail-meta">of target volume reached</div>
+      <div class="progress"><div class="bar" id="detailBar" style="width:85%"></div></div>
+      <div class="timer" style="display:inline-block;margin-top:10px">31:42:16 remaining</div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info"><label>Current volume</label><strong id="detailVolume">850 kg</strong></div>
+      <div class="info"><label>Target volume</label><strong id="detailTarget">1,000 kg</strong></div>
+      <div class="info"><label>Current saving</label><strong id="detailCurrent">15%</strong></div>
+      <div class="info"><label>Maximum saving</label><strong id="detailMax">18%</strong></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Price comparison</div>
+      <div class="section-caption">Illustrative Bahrain benchmark pricing for the prototype.</div>
+
+      <div class="price-compare">
+        <div class="price-box">
+          <div class="price-label">Retail reference</div>
+          <div class="price-value" id="retailPrice">BHD 0.375/kg</div>
+          <div class="price-note">Observed supermarket-style reference</div>
+        </div>
+        <div class="price-box">
+          <div class="price-label">Small-order business</div>
+          <div class="price-value" id="businessPrice">BHD 0.350/kg</div>
+          <div class="price-note">Illustrative non-pooled business price</div>
+        </div>
+        <div class="price-box highlight">
+          <div class="price-label">Current pooled price</div>
+          <div class="price-value" id="pooledPrice">BHD 0.305/kg</div>
+          <div class="price-note">Based on current pooled volume</div>
+        </div>
+        <div class="price-box">
+          <div class="price-label">Maximum-tier price</div>
+          <div class="price-value" id="maxTierPrice">BHD 0.300/kg</div>
+          <div class="price-note">Illustrative price if target is reached</div>
+        </div>
+      </div>
+
+      <div class="saving-strip" id="retailSaving">
+        Approx. 18.7% below the retail reference at the current pool tier.
+      </div>
+
+      <div class="section-caption" style="margin:10px 0 0">
+        Final supplier pricing would depend on distributor quotations and actual pooled order volume.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Discount tiers</div>
+      <div id="tierList"></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">How the pool works</div>
+      <div class="explainer">
+        <div class="explainer-step">
+          <div class="step-num">1</div>
+          <div><div class="step-title">Businesses place small orders</div><div class="step-text">Each buyer selects the quantity they need.</div></div>
+        </div>
+        <div class="explainer-step">
+          <div class="step-num">2</div>
+          <div><div class="step-title">PoolCart combines demand</div><div class="step-text">Orders accumulate during the 48-hour item window.</div></div>
+        </div>
+        <div class="explainer-step">
+          <div class="step-num">3</div>
+          <div><div class="step-title">Final volume sets the discount</div><div class="step-text">The aggregate quantity determines the wholesale tier.</div></div>
+        </div>
+        <div class="explainer-step">
+          <div class="step-num">4</div>
+          <div><div class="step-title">Distributor fulfils the pooled order</div><div class="step-text">Delivery moves directly from the distributor to participating stores.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn primary" onclick="startJoinPool()">Join this pool</button>
+    <button class="btn secondary" onclick="showScreen('activity')">View pool activity</button>
+  </div>
+</section>
+
+<!-- ACTIVITY -->
+<section id="activity" class="screen">
+  <div class="header">
+    <div class="back" onclick="showScreen('detail')">← Back to pool</div>
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">Pool activity</div>
+        <div class="brand-sub">Prototype activity feed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <div class="section-title">Current progress</div>
+      <div class="progress-row">
+        <span id="activityPercent">85% of target</span>
+        <span id="activityVolume">850 / 1,000 kg</span>
+      </div>
+      <div class="progress"><div class="bar" id="activityBar" style="width:85%"></div></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Recent activity</div>
+      <div id="activityList" class="activity-list">
+        <div class="activity"><span>Retailer A joined the pool</span><strong>+40 kg</strong></div>
+        <div class="activity"><span>Restaurant B joined the pool</span><strong>+25 kg</strong></div>
+        <div class="activity"><span>Retailer C joined the pool</span><strong>+30 kg</strong></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Pitch demo control</div>
+      <div class="section-caption">This control is only for demonstrating how pooled demand changes the discount progress.</div>
+      <button class="btn primary" onclick="simulateJoin()">Simulate another buyer</button>
+      <button class="btn outline" onclick="resetPool()">Reset demo</button>
+    </div>
+
+    <div class="notice">
+      The names and activity above are sample prototype data. They are shown only to demonstrate the user experience.
+    </div>
+  </div>
+</section>
+
+<!-- CART -->
+<section id="cart" class="screen">
+  <div class="header">
+    <div class="back" onclick="showScreen('detail')">← Back to pool</div>
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">Join pool</div>
+        <div class="brand-sub">Set your order quantity</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="card detail-hero">
+      <div class="detail-icon" id="cartIcon">🧅</div>
+      <div class="detail-name" id="cartName">Onions</div>
+      <div class="detail-meta">Current pool discount: <span id="cartDiscount">15%</span></div>
+    </div>
+
+    <div class="card">
+      <div class="section-title" style="text-align:center">Quantity</div>
+      <div class="quantity">
+        <button class="qty-btn" onclick="changeQty(-10)">−</button>
+        <div><span id="qty" class="qty-value">50</span> <span style="font-size:11px">kg</span></div>
+        <button class="qty-btn" onclick="changeQty(10)">+</button>
+      </div>
+
+      <div class="quick-qty">
+        <button onclick="setQty(25)">25 kg</button>
+        <button onclick="setQty(50)">50 kg</button>
+        <button onclick="setQty(100)">100 kg</button>
+        <button onclick="setQty(200)">200 kg</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Estimated order value</div>
+      <div class="price-line"><span>Retail-reference value</span><strong id="basePrice">BHD 18.75</strong></div>
+      <div class="price-line"><span>Estimated saving vs retail</span><strong id="savingAmount" style="color:var(--green)">− BHD 3.50</strong></div>
+      <div class="price-line total"><span>Current pooled estimate</span><strong id="totalPrice">BHD 15.25</strong></div>
+      <div class="section-caption" style="margin:8px 0 0">Illustrative prototype pricing only. This is not live supplier pricing.</div>
+    </div>
+
+    <button class="btn primary" onclick="placeOrder()">Confirm demo order</button>
+    <button class="btn outline" onclick="showScreen('detail')">Cancel</button>
+  </div>
+</section>
+
+<!-- ORDERS -->
+<section id="orders" class="screen">
+  <div class="header">
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">Orders</div>
+        <div class="brand-sub">Track pooled orders</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <div class="section-title" id="orderPoolTitle">Onion Pool</div>
+      <div class="section-caption">Demo order #PC1048</div>
+
+      <div class="timeline">
+        <div class="timeline-item"><div class="dot done"></div><div><b>Order confirmed</b><p>Your quantity was added to the pool.</p></div></div>
+        <div class="timeline-item"><div class="dot current"></div><div><b>Pooling in progress</b><p>The 48-hour item window is still open.</p></div></div>
+        <div class="timeline-item"><div class="dot"></div><div><b>Distributor confirmation</b><p>Final pooled quantity will be submitted.</p></div></div>
+        <div class="timeline-item"><div class="dot"></div><div><b>Out for delivery</b><p>Distributor delivery to the store.</p></div></div>
+        <div class="timeline-item"><div class="dot"></div><div><b>Delivered</b><p>Order completed.</p></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="section-title">Order summary</div>
+      <div class="price-line"><span>Product</span><strong id="orderProduct">Onions</strong></div>
+      <div class="price-line"><span>Quantity</span><strong id="orderQty">50 kg</strong></div>
+      <div class="price-line"><span>Pool window</span><strong>48 hours</strong></div>
+      <div class="price-line"><span>Pricing basis</span><strong>Current pooled tier</strong></div>
+      <div class="price-line total"><span>Estimated total</span><strong id="orderTotal">BHD 21.25</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ACCOUNT -->
+<section id="account" class="screen">
+  <div class="header">
+    <div class="brand">
+      <img src="poolcart-logo.jpg" alt="PoolCart logo">
+      <div>
+        <div class="brand-name">Account</div>
+        <div class="brand-sub">Prototype retailer profile</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="card">
+      <div class="section-title">Demo retailer</div>
+      <div class="price-line"><span>Business type</span><strong>Independent retailer</strong></div>
+      <div class="price-line"><span>Market</span><strong>Bahrain</strong></div>
+      <div class="price-line"><span>Prototype status</span><strong>Active</strong></div>
+    </div>
+
+    <div class="notice">
+      This prototype focuses on the purchasing workflow. It does not display company revenue, customer traction, or live commercial performance.
+    </div>
+  </div>
+</section>
+
+<!-- BOTTOM NAV -->
+<nav class="bottom-nav">
+  <div class="nav-item active" data-nav="home" onclick="showScreen('home')">
+    <div class="nav-icon">⌂</div>Home
+  </div>
+  <div class="nav-item" data-nav="detail" onclick="showScreen('detail')">
+    <div class="nav-icon">◫</div>Pools
+  </div>
+  <div class="nav-item" data-nav="orders" onclick="showScreen('orders')">
+    <div class="nav-icon">▣</div>Orders
+  </div>
+  <div class="nav-item" data-nav="account" onclick="showScreen('account')">
+    <div class="nav-icon">○</div>Account
+  </div>
+</nav>
+
+</div>
+
+<div class="toast" id="toast"></div>
 
 <script>
-
-/* ======================================================
-   SCREEN NAVIGATION
-====================================================== */
-
-function showScreen(id){
-
-  document
-  .querySelectorAll(".screen")
-  .forEach(
-    screen => {
-
-      screen
-      .classList
-      .remove("active");
-
-    }
-  );
-
-
-  document
-  .getElementById(id)
-  .classList
-  .add("active");
-
-
-  window.scrollTo(
-    0,
-    0
-  );
-
-
-  /*
-  Leaflet maps need their size recalculated
-  when a hidden map becomes visible.
-  */
-
-  if(
-    id === "map"
-    &&
-    bahrainMap
-  ){
-
-    setTimeout(
-      () => {
-
-        bahrainMap.invalidateSize();
-
-      },
-      200
-    );
-
-  }
-
-}
-
-
-
-/* ======================================================
-   SEARCH
-====================================================== */
-
-function searchProducts(){
-
-  const search =
-  document
-  .getElementById("searchInput")
-  .value
-  .toLowerCase();
-
-
-  document
-  .querySelectorAll(".product-card")
-  .forEach(
-
-    card => {
-
-      const name =
-      card.dataset.name;
-
-
-      card.style.display =
-      name.includes(search)
-      ? "block"
-      : "none";
-
-    }
-
-  );
-
-}
-
-
-
-/* ======================================================
-   QUANTITY + PRICE
-====================================================== */
-
-let quantity = 50;
-
-
-/*
-Demo price:
-BHD 0.500 per kg
-*/
-
-const unitPrice = 0.50;
-
-
-/*
-Current pool saving:
-15%
-*/
-
-const discountRate = 0.15;
-
-
-
-function changeQty(amount){
-
-  quantity += amount;
-
-
-  if(quantity < 10){
-
-    quantity = 10;
-
-  }
-
-
-  updatePrice();
-
-}
-
-
-
-function updatePrice(){
-
-  const base =
-  quantity *
-  unitPrice;
-
-
-  const saving =
-  base *
-  discountRate;
-
-
-  const total =
-  base -
-  saving;
-
-
-  document
-  .getElementById("qty")
-  .innerText =
-  quantity;
-
-
-  document
-  .getElementById("basePrice")
-  .innerText =
-  "BHD " +
-  base.toFixed(2);
-
-
-  document
-  .getElementById("savingAmount")
-  .innerText =
-  "− BHD " +
-  saving.toFixed(2);
-
-
-  document
-  .getElementById("estimatedTotal")
-  .innerText =
-  "BHD " +
-  total.toFixed(2);
-
-}
-
-
-
-/* ======================================================
-   PLACE ORDER
-====================================================== */
-
-function placeOrder(){
-
-  const base =
-  quantity *
-  unitPrice;
-
-
-  const saving =
-  base *
-  discountRate;
-
-
-  const total =
-  base -
-  saving;
-
-
-  document
-  .getElementById("orderQty")
-  .innerText =
-  quantity +
-  " kg";
-
-
-  document
-  .getElementById("orderTotal")
-  .innerText =
-  "BHD " +
-  total.toFixed(2);
-
-
-  showScreen(
-    "tracking"
-  );
-
-}
-
-
-
-/* ======================================================
-   ACTUAL BAHRAIN MAP
-====================================================== */
-
-let bahrainMap;
-
-
-/*
-Initialise the real map.
-*/
-
-function initializeMap(){
-
-
-  /*
-  Approximate centre of Bahrain.
-  */
-
-  bahrainMap =
-  L.map(
-    "bahrainMap",
-    {
-      zoomControl:true
-    }
-  )
-  .setView(
-    [26.0667,50.5577],
-    10
-  );
-
-
-  /*
-  Real OpenStreetMap tiles.
-  */
-
-  L.tileLayer(
-    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    {
-
-      maxZoom:19,
-
-      attribution:
-      "&copy; OpenStreetMap contributors"
-
-    }
-  )
-  .addTo(
-    bahrainMap
-  );
-
-
-  /*
-  PoolCart marker icon.
-  */
-
-  const poolIcon =
-  L.divIcon({
-
-    className:"",
-
-    html:
-
-    '<div class="pool-marker">' +
-
-    '🛒' +
-
-    '<small>PoolCart</small>' +
-
-    '</div>',
-
-    iconSize:
-    [55,55],
-
-    iconAnchor:
-    [27,27]
-
-  });
-
-
-
-  /*
-  Retailer marker icon.
-  */
-
-  const shopIcon =
-  L.divIcon({
-
-    className:"",
-
-    html:
-
-    '<div class="shop-marker">' +
-
-    '🏪' +
-
-    '</div>',
-
-    iconSize:
-    [38,38],
-
-    iconAnchor:
-    [19,19]
-
-  });
-
-
-
-  /*
-  Restaurant icon.
-  */
-
-  const restaurantIcon =
-  L.divIcon({
-
-    className:"",
-
-    html:
-
-    '<div class="shop-marker">' +
-
-    '🍽️' +
-
-    '</div>',
-
-    iconSize:
-    [38,38],
-
-    iconAnchor:
-    [19,19]
-
-  });
-
-
-
-  /*
-  Central PoolCart network marker.
-  */
-
-  L.marker(
-    [26.2235,50.5876],
-    {
-      icon:poolIcon
-    }
-  )
-  .addTo(
-    bahrainMap
-  )
-  .bindPopup(
-    "<b>PoolCart Network</b><br>" +
-    "Aggregating retailer demand."
-  );
-
-
-
-  /*
-  Example businesses placed around
-  real Bahrain locations.
-  */
-
-  addBusinessMarker(
-    26.2235,
-    50.5876,
-    "Manama Grocery",
-    shopIcon,
-    "40 kg"
-  );
-
-
-  addBusinessMarker(
-    26.2110,
-    50.6010,
-    "Juffair Restaurant",
-    restaurantIcon,
-    "25 kg"
-  );
-
-
-  addBusinessMarker(
-    26.2572,
-    50.6119,
-    "Muharraq Market",
-    shopIcon,
-    "30 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1298,
-    50.5550,
-    "Isa Town Store",
-    shopIcon,
-    "35 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1300,
-    50.5550,
-    "Central Restaurant",
-    restaurantIcon,
-    "20 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1260,
-    50.5550,
-    "Local Retailer",
-    shopIcon,
-    "45 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1290,
-    50.5200,
-    "Riffa Retailer",
-    shopIcon,
-    "50 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1150,
-    50.5060,
-    "Riffa Restaurant",
-    restaurantIcon,
-    "25 kg"
-  );
-
-
-  addBusinessMarker(
-    26.1120,
-    50.4820,
-    "Hamad Town Market",
-    shopIcon,
-    "40 kg"
-  );
-
-
-  addBusinessMarker(
-    26.2450,
-    50.5500,
-    "Seef Retailer",
-    shopIcon,
-    "35 kg"
-  );
-
-}
-
-
-/*
-Business marker helper.
-*/
-
-function addBusinessMarker(
-  latitude,
-  longitude,
-  business,
-  icon,
-  quantity
-){
-
-  L.marker(
-    [
-      latitude,
-      longitude
-    ],
-    {
-      icon:icon
-    }
-  )
-  .addTo(
-    bahrainMap
-  )
-  .bindPopup(
-
-    "<b>" +
-    business +
-    "</b>" +
-
-    "<br>" +
-
-    "Pool contribution: " +
-    quantity
-
-  );
-
-}
-
-
-
-/* ======================================================
-   LIVE POOL SIMULATION
-====================================================== */
-
-let mapPercentage = 85;
-
-let businessesJoined = 17;
-
-let currentVolume = 850;
-
-
-/*
-Different areas to simulate
-new businesses joining.
-*/
-
-const newBusinessLocations = [
-
+const pools = [
   {
-    name:"New Manama Retailer",
-    lat:26.228,
-    lng:50.575
+    id:'onion',name:'Onions',icon:'🧅',category:'fresh',volume:850,target:1000,percent:85,
+    time:'31:42:16',area:'Bahrain-wide demo pool',
+    unit:'kg', retailPrice:0.375, businessPrice:0.350,
+    tiers:[
+      {min:0,price:0.350,label:'Small-order business'},
+      {min:500,price:0.330,label:'500 kg+'},
+      {min:700,price:0.315,label:'700 kg+'},
+      {min:850,price:0.305,label:'850 kg+'},
+      {min:1000,price:0.300,label:'1,000 kg'}
+    ]
   },
-
   {
-    name:"New Saar Grocery",
-    lat:26.198,
-    lng:50.487
+    id:'flour',name:'Flour',icon:'🌾',category:'staples',volume:600,target:1000,percent:60,
+    time:'40:21:03',area:'Central Bahrain demo pool',
+    unit:'kg', retailPrice:0.295, businessPrice:0.250,
+    tiers:[
+      {min:0,price:0.250,label:'Small-order business'},
+      {min:500,price:0.235,label:'500 kg+'},
+      {min:700,price:0.225,label:'700 kg+'},
+      {min:850,price:0.215,label:'850 kg+'},
+      {min:1000,price:0.210,label:'1,000 kg'}
+    ]
   },
-
   {
-    name:"New Riffa Market",
-    lat:26.129,
-    lng:50.555
+    id:'rice',name:'Rice',icon:'🍚',category:'staples',volume:400,target:1000,percent:40,
+    time:'45:08:40',area:'Northern Bahrain demo pool',
+    unit:'kg', retailPrice:0.830, businessPrice:0.750,
+    tiers:[
+      {min:0,price:0.750,label:'Small-order business'},
+      {min:500,price:0.710,label:'500 kg+'},
+      {min:700,price:0.690,label:'700 kg+'},
+      {min:850,price:0.670,label:'850 kg+'},
+      {min:1000,price:0.650,label:'1,000 kg'}
+    ]
+  },
+  {
+    id:'tomatoes',name:'Tomatoes',icon:'🍅',category:'fresh',volume:720,target:1000,percent:72,
+    time:'22:17:50',area:'Produce demo pool',
+    unit:'kg', retailPrice:0.540, businessPrice:0.500,
+    tiers:[
+      {min:0,price:0.500,label:'Small-order business'},
+      {min:500,price:0.475,label:'500 kg+'},
+      {min:700,price:0.455,label:'700 kg+'},
+      {min:850,price:0.440,label:'850 kg+'},
+      {min:1000,price:0.425,label:'1,000 kg'}
+    ]
+  },
+  {
+    id:'oil',name:'Cooking Oil',icon:'🫗',category:'restaurant',volume:540,target:900,percent:60,
+    time:'36:11:22',area:'Restaurant supply demo pool',
+    unit:'1.5 L', retailPrice:1.890, businessPrice:1.700,
+    tiers:[
+      {min:0,price:1.700,label:'Small-order business'},
+      {min:450,price:1.620,label:'450 units+'},
+      {min:600,price:1.570,label:'600 units+'},
+      {min:750,price:1.530,label:'750 units+'},
+      {min:900,price:1.500,label:'900 units'}
+    ]
+  },
+  {
+    id:'potatoes',name:'Potatoes',icon:'🥔',category:'fresh',volume:780,target:1000,percent:78,
+    time:'27:09:12',area:'Retailer demo pool',
+    unit:'kg', retailPrice:0.390, businessPrice:0.350,
+    tiers:[
+      {min:0,price:0.350,label:'Small-order business'},
+      {min:500,price:0.330,label:'500 kg+'},
+      {min:700,price:0.315,label:'700 kg+'},
+      {min:850,price:0.305,label:'850 kg+'},
+      {min:1000,price:0.300,label:'1,000 kg'}
+    ]
   }
-
 ];
 
+let activeCategory='all';
+let selectedPool=pools[0];
+let quantity=50;
+let poolPercent=85;
+let poolVolume=850;
+let activityCounter=0;
 
-let locationIndex = 0;
+
+function currentTier(pool){
+  let tier=pool.tiers[0];
+  for(const t of pool.tiers){
+    if(pool.volume>=t.min) tier=t;
+  }
+  return tier;
+}
+
+function currentUnitPrice(pool){
+  return currentTier(pool).price;
+}
+
+function maxTierPrice(pool){
+  return pool.tiers[pool.tiers.length-1].price;
+}
+
+function formatUnitPrice(value, unit){
+  if(value < 1 && unit === 'kg'){
+    return Math.round(value*1000)+' fils/kg';
+  }
+  return 'BHD '+value.toFixed(3)+'/'+unit;
+}
+
+function savingPct(reference, price){
+  return ((reference-price)/reference)*100;
+}
+
+function renderTierList(pool){
+  const box=document.getElementById('tierList');
+  if(!box) return;
+  const current=currentTier(pool);
+  box.innerHTML='';
+  pool.tiers.slice(1).forEach(t=>{
+    const row=document.createElement('div');
+    const isCurrent=t.min===current.min;
+    row.className='tier'+(isCurrent?' current-tier':'');
+    const priceText=formatUnitPrice(t.price,pool.unit);
+    let status='';
+    if(pool.volume>=t.min){
+      status=isCurrent?' • current':' • reached';
+    }
+    row.innerHTML=`<span>${t.label}</span><span>${priceText}${status}</span>`;
+    box.appendChild(row);
+  });
+}
+
+function updatePriceComparison(pool){
+  const current=currentUnitPrice(pool);
+  const max=maxTierPrice(pool);
+
+  document.getElementById('retailPrice').textContent=formatUnitPrice(pool.retailPrice,pool.unit);
+  document.getElementById('businessPrice').textContent=formatUnitPrice(pool.businessPrice,pool.unit);
+  document.getElementById('pooledPrice').textContent=formatUnitPrice(current,pool.unit);
+  document.getElementById('maxTierPrice').textContent=formatUnitPrice(max,pool.unit);
+
+  const currentSaving=savingPct(pool.retailPrice,current);
+  const maxSaving=savingPct(pool.retailPrice,max);
+
+  document.getElementById('retailSaving').textContent=
+    `Current pooled price is about ${currentSaving.toFixed(1)}% below the retail reference. `+
+    `At the maximum tier, the difference would be about ${maxSaving.toFixed(1)}%.`;
+
+  document.getElementById('detailCurrent').textContent=currentSaving.toFixed(1)+'% vs retail';
+  document.getElementById('detailMax').textContent=maxSaving.toFixed(1)+'% vs retail';
+
+  renderTierList(pool);
+}
+
+function renderPools(){
+  const q=(document.getElementById('searchInput')?.value||'').toLowerCase();
+  const list=document.getElementById('poolList');
+  list.innerHTML='';
+
+  pools
+  .filter(p => (activeCategory==='all'||p.category===activeCategory) && p.name.toLowerCase().includes(q))
+  .forEach(p=>{
+    const card=document.createElement('div');
+    card.className='card pool-card';
+    card.innerHTML=`
+      <div class="pool-top">
+        <div class="product">
+          <div class="icon">${p.icon}</div>
+          <div>
+            <div class="product-name">${p.name}</div>
+            <div class="product-meta">${p.volume} ${p.unit==='kg'?'kg':'units'} pooled • ${p.area}</div>
+          </div>
+        </div>
+        <div class="discount">${formatUnitPrice(currentUnitPrice(p),p.unit)}</div>
+      </div>
+
+      <div class="progress-row">
+        <span>${p.percent}% of target</span>
+        <span>${p.target-p.volume} kg remaining</span>
+      </div>
+
+      <div class="progress"><div class="bar" style="width:${p.percent}%"></div></div>
+
+      <div class="pool-footer">
+        <div class="timer">${p.time}</div>
+        <div style="display:flex;gap:10px;align-items:center">
+          <button class="link-btn" onclick="openPool('${p.id}')">View details</button>
+          <button class="link-btn" onclick="quickJoin('${p.id}')">Join</button>
+        </div>
+      </div>
+    `;
+    list.appendChild(card);
+  });
+}
+
+function setCategory(cat,btn){
+  activeCategory=cat;
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  renderPools();
+}
+
+function openPool(id){
+  selectedPool=pools.find(p=>p.id===id)||pools[0];
+
+  document.getElementById('detailIcon').textContent=selectedPool.icon;
+  document.getElementById('detailName').textContent=selectedPool.name;
+  document.getElementById('detailArea').textContent=selectedPool.area;
+  document.getElementById('detailPercent').textContent=selectedPool.percent+'%';
+  document.getElementById('detailBar').style.width=selectedPool.percent+'%';
+  document.getElementById('detailVolume').textContent=selectedPool.volume+' kg';
+  document.getElementById('detailTarget').textContent=selectedPool.target.toLocaleString()+' kg';
+  updatePriceComparison(selectedPool);
+
+  showScreen('detail');
+}
 
 
+function startJoinPool(){
+  // Keep the currently selected pool and carry its details into the order screen.
+  document.getElementById('cartIcon').textContent=selectedPool.icon;
+  document.getElementById('cartName').textContent=selectedPool.name;
+  const pct=savingPct(selectedPool.retailPrice,currentUnitPrice(selectedPool));
+  document.getElementById('cartDiscount').textContent=pct.toFixed(1)+'% vs retail';
+  updatePrice();
+  showScreen('cart');
+}
+
+function quickJoin(id){
+  selectedPool=pools.find(p=>p.id===id)||pools[0];
+  startJoinPool();
+}
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.toggle('active',n.dataset.nav===id);
+  });
+
+  window.scrollTo(0,0);
+}
+
+function changeQty(delta){
+  quantity=Math.max(10,quantity+delta);
+  updatePrice();
+}
+function setQty(value){
+  quantity=value;
+  updatePrice();
+}
+function updatePrice(){
+  const retailTotal=quantity*selectedPool.retailPrice;
+  const pooledUnit=currentUnitPrice(selectedPool);
+  const total=quantity*pooledUnit;
+  const saving=retailTotal-total;
+
+  document.getElementById('qty').textContent=quantity;
+  document.getElementById('basePrice').textContent='BHD '+retailTotal.toFixed(2);
+  document.getElementById('savingAmount').textContent='− BHD '+saving.toFixed(2);
+  document.getElementById('totalPrice').textContent='BHD '+total.toFixed(2);
+
+  document.getElementById('orderQty').textContent=quantity+' '+(selectedPool.unit==='kg'?'kg':'units');
+  document.getElementById('orderTotal').textContent='BHD '+total.toFixed(2);
+  document.getElementById('orderProduct').textContent=selectedPool.name;
+  const orderTitle=document.getElementById('orderPoolTitle');
+  if(orderTitle) orderTitle.textContent=selectedPool.name+' Pool';
+}
 
 function simulateJoin(){
-
-
-  if(
-    mapPercentage >= 100
-  ){
-
-    alert(
-      "🎉 Maximum discount tier already unlocked!"
-    );
-
+  if(poolPercent>=100){
+    toast('Demo pool is already at the maximum tier.');
     return;
-
   }
 
-
-  /*
-  Each demo click adds:
-  5% progress
-  50 kg
-  1 business
-  */
-
-  mapPercentage += 5;
-
-  businessesJoined += 1;
-
-  currentVolume += 50;
-
-
-  if(
-    mapPercentage > 100
-  ){
-
-    mapPercentage = 100;
-
-  }
-
-
-  if(
-    currentVolume > 1000
-  ){
-
-    currentVolume = 1000;
-
-  }
-
-
-  updatePoolEverywhere();
-
-
-
-  /*
-  Add a new real map marker.
-  */
-
-  if(
-    locationIndex <
-    newBusinessLocations.length
-  ){
-
-    const business =
-    newBusinessLocations[
-      locationIndex
-    ];
-
-
-    const joinIcon =
-    L.divIcon({
-
-      className:"",
-
-      html:
-
-      '<div class="shop-marker">' +
-
-      '🏪' +
-
-      '</div>',
-
-      iconSize:
-      [38,38],
-
-      iconAnchor:
-      [19,19]
-
-    });
-
-
-    L.marker(
-
-      [
-        business.lat,
-        business.lng
-      ],
-
-      {
-        icon:joinIcon
-      }
-
-    )
-    .addTo(
-      bahrainMap
-    )
-    .bindPopup(
-
-      "<b>" +
-      business.name +
-      "</b>" +
-
-      "<br>" +
-
-      "Just joined the Onion Pool!" +
-
-      "<br>" +
-
-      "+50 kg"
-
-    )
-    .openPopup();
-
-
-    locationIndex++;
-
-  }
-
-
-
-  /*
-  Add activity item.
-  */
-
-  const activity =
-  document.createElement(
-    "div"
-  );
-
-
-  activity.className =
-  "activity";
-
-
-  activity.innerHTML =
-
-  "<span>" +
-
-  "🏪 New Business Joined" +
-
-  "</span>" +
-
-  "<strong>" +
-
-  "+50 kg" +
-
-  "</strong>";
-
-
-  document
-  .getElementById(
-    "activityList"
-  )
-  .prepend(
-    activity
-  );
-
-
-
-  /*
-  Success at 100%.
-  */
-
-  if(
-    mapPercentage === 100
-  ){
-
-    document
-    .getElementById(
-      "maxUnlocked"
-    )
-    .style.display =
-    "block";
-
-
-    setTimeout(
-
-      () => {
-
-        alert(
-
-          "🎉 Maximum Discount Unlocked!\n\n" +
-
-          "The Onion Pool has reached 100%.\n\n" +
-
-          "Maximum wholesale discount tier achieved."
-
-        );
-
-      },
-
-      350
-
-    );
-
-  }
-
+  poolPercent=Math.min(100,poolPercent+5);
+  poolVolume=Math.min(1000,poolVolume+50);
+
+  const names=['Retailer D','Restaurant E','Retailer F'];
+  const name=names[Math.min(activityCounter,names.length-1)];
+  activityCounter++;
+
+  const item=document.createElement('div');
+  item.className='activity';
+  item.innerHTML=`<span>${name} joined the pool</span><strong>+50 kg</strong>`;
+  document.getElementById('activityList').prepend(item);
+
+  document.getElementById('activityPercent').textContent=poolPercent+'% of target';
+  document.getElementById('activityVolume').textContent=poolVolume+' / 1,000 kg';
+  document.getElementById('activityBar').style.width=poolPercent+'%';
+
+  document.getElementById('detailPercent').textContent=poolPercent+'%';
+  document.getElementById('detailBar').style.width=poolPercent+'%';
+  document.getElementById('detailVolume').textContent=poolVolume+' kg';
+
+  pools[0].percent=poolPercent;
+  pools[0].volume=poolVolume;
+  renderPools();
+
+  toast(poolPercent===100 ? 'Maximum discount tier reached.' : 'Demo buyer added to the pool.');
 }
 
+function resetPool(){
+  poolPercent=85;
+  poolVolume=850;
+  activityCounter=0;
 
+  document.getElementById('activityPercent').textContent='85% of target';
+  document.getElementById('activityVolume').textContent='850 / 1,000 kg';
+  document.getElementById('activityBar').style.width='85%';
 
-/* ======================================================
-   UPDATE POOL ACROSS APP
-====================================================== */
+  document.getElementById('detailPercent').textContent='85%';
+  document.getElementById('detailBar').style.width='85%';
+  document.getElementById('detailVolume').textContent='850 kg';
 
-function updatePoolEverywhere(){
+  pools[0].percent=85;
+  pools[0].volume=850;
+  renderPools();
 
-
-  /*
-  MAP
-  */
-
-  document
-  .getElementById(
-    "mapPercent"
-  )
-  .innerText =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "mapProgress"
-  )
-  .style.width =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "joinedCount"
-  )
-  .innerText =
-  businessesJoined +
-  " businesses joined";
-
-
-  document
-  .getElementById(
-    "remainingText"
-  )
-  .innerText =
-  (100 - mapPercentage) +
-  "% remaining";
-
-
-
-  /*
-  POOL DETAIL
-  */
-
-  document
-  .getElementById(
-    "detailPercent"
-  )
-  .innerText =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "detailBar"
-  )
-  .style.width =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "detailVolume"
-  )
-  .innerText =
-  currentVolume;
-
-
-
-  /*
-  HOME
-  */
-
-  document
-  .getElementById(
-    "homePercent"
-  )
-  .innerText =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "homeBar"
-  )
-  .style.width =
-  mapPercentage +
-  "%";
-
-
-  document
-  .getElementById(
-    "homeProgressText"
-  )
-  .innerText =
-  mapPercentage +
-  "% to max discount";
-
-
-  document
-  .getElementById(
-    "homeVolume"
-  )
-  .innerText =
-  currentVolume;
-
+  toast('Demo reset.');
 }
 
-
-
-/* ======================================================
-   48-HOUR COUNTDOWN DEMO
-====================================================== */
-
-let secondsRemaining =
-
-(
-  31 *
-  60 *
-  60
-)
-
-+
-
-(
-  42 *
-  60
-)
-
-+
-
-16;
-
-
-
-function updateTimer(){
-
-
-  if(
-    secondsRemaining <= 0
-  ){
-
-    document
-    .getElementById(
-      "homeTimer"
-    )
-    .innerText =
-    "POOL CLOSED";
-
-
-    document
-    .getElementById(
-      "detailTimer"
-    )
-    .innerText =
-    "POOL CLOSED";
-
-
-    return;
-
+function placeOrder(){
+  // This simulates adding the retailer's order to the selected pool.
+  selectedPool.volume += quantity;
+  selectedPool.percent = Math.min(100, Math.round((selectedPool.volume/selectedPool.target)*100));
+  if(selectedPool.id==='onion'){
+    poolVolume=selectedPool.volume;
+    poolPercent=selectedPool.percent;
   }
-
-
-  secondsRemaining--;
-
-
-  const hours =
-
-  Math.floor(
-    secondsRemaining /
-    3600
-  );
-
-
-  const minutes =
-
-  Math.floor(
-
-    (
-      secondsRemaining %
-      3600
-    )
-
-    /
-
-    60
-
-  );
-
-
-  const seconds =
-
-  secondsRemaining %
-  60;
-
-
-  const time =
-
-  String(hours)
-  .padStart(
-    2,
-    "0"
-  )
-
-  +
-
-  ":"
-
-  +
-
-  String(minutes)
-  .padStart(
-    2,
-    "0"
-  )
-
-  +
-
-  ":"
-
-  +
-
-  String(seconds)
-  .padStart(
-    2,
-    "0"
-  );
-
-
-  document
-  .getElementById(
-    "homeTimer"
-  )
-  .innerText =
-  time;
-
-
-  document
-  .getElementById(
-    "detailTimer"
-  )
-  .innerText =
-  time;
-
+  renderPools();
+  if(document.getElementById('detail').classList.contains('active')) updatePriceComparison(selectedPool);
+  updatePrice();
+  toast(quantity+' '+(selectedPool.unit==='kg'?'kg':'units')+' added to '+selectedPool.name+' pool.');
+  setTimeout(()=>showScreen('orders'),450);
 }
 
+function toast(message){
+  const t=document.getElementById('toast');
+  t.textContent=message;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1700);
+}
 
-
-/* ======================================================
-   START APP
-====================================================== */
-
+renderPools();
 updatePrice();
-
-
-initializeMap();
-
-
-setInterval(
-  updateTimer,
-  1000
-);
-
 </script>
 
-
 </body>
-
 </html>
